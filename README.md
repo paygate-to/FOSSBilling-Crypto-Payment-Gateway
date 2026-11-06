@@ -18,7 +18,7 @@ Accept Bitcoin, Ethereum, USDT, USDC, Solana, Litecoin, Monero, Zcash and more o
   - repeated confirmations are ignored;
   - the payout must go to your wallets, and the coin and the amount are checked before an invoice is paid.
 - Works with your own checkout domain and a free dedicated API endpoint ([custom domain guide](https://paygate.to/white-label-api-custom-domain-guide/)).
-- Fees: **1.5% + blockchain fees**.
+- Fees: **1% + blockchain fees**.
 
 📘 **Step-by-step guide:** [https://paygate.to/crypto-payment-gateway-no-kyc-instant-payouts/fossbilling/](https://paygate.to/crypto-payment-gateway-no-kyc-instant-payouts/fossbilling/)
 
