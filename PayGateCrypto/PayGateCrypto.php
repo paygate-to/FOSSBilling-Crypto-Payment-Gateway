@@ -355,7 +355,7 @@ class Payment_Adapter_PayGateCrypto extends Payment_AdapterAbstract implements F
             // Hosted page (the customer chose the coin there) or an outdated quote: price the invoice in that coin now.
             $conversion = $this->pgRequest('GET', 'https://' . $this->pgApiHost() . '/crypto/' . self::coinPath($coin) . '/convert.php?value=' . rawurlencode(self::pgAmount($total)) . '&from=' . rawurlencode($currency));
             if ($conversion === null || !isset($conversion['value_coin']) || !is_numeric($conversion['value_coin'])) {
-                throw new Payment_Exception('Could not price the invoice in :coin to check the amount', [':coin' => $coin]);
+                throw new Payment_Exception('Could not price the invoice in :coin to check the amount', [':coin' => $coin], 503);
             }
             $expected = (float) $conversion['value_coin'];
         }
@@ -684,7 +684,7 @@ class Payment_Adapter_PayGateCrypto extends Payment_AdapterAbstract implements F
     {
         $name = 'paygate:invoice:' . $invoiceId;
         if ((int) $this->di['db']->getCell('SELECT GET_LOCK(:name, 20)', [':name' => $name]) !== 1) {
-            throw new Payment_Exception('Another PayGate.to callback for invoice #:id is being handled; this one will be retried', [':id' => $invoiceId]);
+            throw new Payment_Exception('Another PayGate.to callback for invoice #:id is being handled; this one will be retried', [':id' => $invoiceId], 503);
         }
         $this->pgLockName = $name;
     }
